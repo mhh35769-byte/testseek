@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Seekr is a local reverse marketplace for Greater Sudbury. Post what you need, compare real offers and close with confidence.">
+<meta property="og:title" content="Seekr — Post what you need. Compare real offers.">
+<meta property="og:description" content="Ask for what you need. Give what you can. Keep it local.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Seekr","description":"A local reverse marketplace for Greater Sudbury, Ontario."}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Seekr — Post what you need. Compare real offers.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F5F6F8;--surface:#fff;--ink:#12151B;--mute:#5E6573;--line:#E1E4EA;--accent:#2F3CFF;--accent-ink:#fff;--soft:#E9EBFF;--ok:#0E7A4F;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1218;--surface:#171B23;--ink:#EEF0F4;--mute:#9AA2B1;--line:#2A303B;--accent:#7E88FF;--accent-ink:#0B0D14;--soft:#232846;--ok:#4FD39B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1218;--surface:#171B23;--ink:#EEF0F4;--mute:#9AA2B1;--line:#2A303B;--accent:#7E88FF;--accent-ink:#0B0D14;--soft:#232846;--ok:#4FD39B;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Instrument Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif;line-height:1.05;margin:0;letter-spacing:-.025em}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font:800 22px "Bricolage Grotesque",sans-serif;letter-spacing:-.03em;text-decoration:none}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:11px 18px;font-weight:600;cursor:pointer;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}.btn:active{transform:none}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.sm{padding:7px 12px;font-size:14px}
+.hero{padding:56px 0 40px}
+.hero h1{font-size:clamp(2.6rem,7.4vw,5.6rem);font-weight:800;max-width:11ch}
+.hero p.sub{font-size:1.15rem;color:var(--mute);max-width:56ch;margin:22px 0 28px}
+.ask{display:flex;gap:8px;background:var(--surface);border:1.5px solid var(--ink);border-radius:14px;padding:8px;max-width:720px;box-shadow:6px 6px 0 var(--accent)}
+.ask input{flex:1;border:0;background:none;padding:10px 12px;min-width:0;font-size:1.05rem}
+.ask input:focus{outline:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 14px;cursor:pointer;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.reveal{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.reveal:nth-child(2){animation-delay:.08s}.reveal:nth-child(3){animation-delay:.16s}.reveal:nth-child(4){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+section{padding:44px 0}
+section>.wrap>h2,.sec-h{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.tag{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:6px 16px 16px 6px;padding:18px 18px 16px 30px;text-align:left;cursor:pointer;transition:border-color .15s,transform .15s}
+.tag:hover{border-color:var(--accent);transform:translateY(-2px)}
+.tag::before{content:"";position:absolute;left:11px;top:20px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--soft)}
+.tag.matched::before{background:var(--ok);box-shadow:0 0 0 4px transparent}
+.tag h3{font-size:1.2rem;line-height:1.15;margin-bottom:6px}
+.meta{color:var(--mute);font-size:14px}
+.budget{font-weight:600;margin-top:10px}
+.empty{border:1.5px dashed var(--line);border-radius:16px;padding:36px;text-align:center;color:var(--mute)}
+.empty b{display:block;color:var(--ink);font:700 1.3rem "Bricolage Grotesque",sans-serif;margin-bottom:6px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;counter-reset:s;border-top:1.5px solid var(--ink)}
+.steps div{padding:20px 20px 8px 0}
+.steps div::before{counter-increment:s;content:counter(s);display:block;font:800 2.4rem "Bricolage Grotesque",sans-serif;color:var(--accent)}
+.steps b{display:block;font-size:1.1rem;margin:4px 0}
+.diff{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.diff p{color:var(--mute);margin:6px 0 0}.diff b{font:700 1.2rem "Bricolage Grotesque",sans-serif}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:30px 0 40px;color:var(--mute);font-size:14px}
+details{margin-top:14px}summary{cursor:pointer;font-weight:600;color:var(--ink)}
+details li{margin:6px 0}
+dialog{border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink);padding:0;width:min(560px,calc(100vw - 24px));max-height:calc(100dvh - 24px)}
+dialog::backdrop{background:rgba(10,12,18,.55)}
+dialog[open]{animation:pop .22s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.985)}}
+.dlg{padding:24px}.dlg h2{font-size:1.7rem;margin-bottom:14px}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+input.f,select.f,textarea.f{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:10px 12px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.offer{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0}
+.offer.acc{border-color:var(--ok)}
+.pill{display:inline-block;font-size:12px;font-weight:600;border-radius:99px;padding:2px 9px;background:var(--soft);color:var(--accent);margin-left:6px}
+.pill.ok{color:var(--ok);background:transparent;border:1px solid var(--ok)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:99;max-width:92vw}
+@media(max-width:560px){.row{grid-template-columns:1fr}.ask{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+html{scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--bg);border-bottom:1px solid var(--line);transition:box-shadow .2s}
+header.s{box-shadow:0 6px 18px rgba(0,0,0,.08)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:41}
+header .wrap{gap:14px}
+nav{display:flex;align-items:center;gap:2px}
+nav>a,nav summary{display:flex;align-items:center;gap:4px;padding:8px 10px;border-radius:8px;text-decoration:none;cursor:pointer;font-size:15px;list-style:none;transition:background .15s}
+nav>a:hover,nav summary:hover{background:var(--soft)}
+summary::-webkit-details-marker{display:none}
+nav a.on{color:var(--accent);font-weight:600}
+.dd{position:relative}
+.mega{position:absolute;top:100%;left:0;min-width:220px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px;display:grid;gap:2px;box-shadow:0 14px 34px rgba(0,0,0,.14);animation:pop .18s ease-out;z-index:5}
+.mega.wide{grid-template-columns:1fr 1fr;min-width:340px}
+.dd.right .mega{left:auto;right:0}
+.mega a{display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:8px;text-decoration:none}
+.mega a:hover{background:var(--soft)}
+.acts{display:flex;gap:8px;align-items:center}
+.burger,.m-only{display:none}
+[data-lucide],svg.lucide{width:1.1em;height:1.1em;flex:none}
+.btn{display:inline-flex;align-items:center;gap:6px}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+@media(max-width:1180px){.burger,.m-only{display:inline-flex}.acts>.btn:not(.burger):not(.pri){display:none}nav{position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;background:var(--bg);border-bottom:1px solid var(--line);padding:0 20px;max-height:0;overflow:hidden;visibility:hidden;opacity:0;transition:.25s}nav.open{max-height:80vh;padding:8px 20px 14px;visibility:visible;opacity:1;overflow:auto}.mega,.mega.wide{position:static;box-shadow:none;min-width:0}}
+.hero{position:relative}
+.fl{position:absolute;display:none;width:64px;height:64px;border-radius:20px;background:var(--surface);border:1px solid var(--line);align-items:center;justify-content:center;color:var(--accent);box-shadow:0 10px 26px rgba(0,0,0,.08);top:calc(50px + var(--i)*78px);animation:flt 5s ease-in-out infinite;animation-delay:calc(var(--i)*-1s)}
+.fl svg{width:26px;height:26px}.fl:nth-of-type(odd){right:150px}.fl:nth-of-type(even){right:40px}
+@keyframes flt{50%{transform:translateY(-10px)}}
+@media(min-width:1000px){.fl{display:flex}}
+#catChips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.cat{display:flex;flex-direction:column;align-items:flex-start;gap:26px;padding:16px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(150deg,var(--soft),var(--surface));cursor:pointer;font-weight:600;text-align:left;transition:transform .15s,border-color .15s}
+.cat:hover{transform:translateY(-3px);border-color:var(--accent)}.cat[aria-pressed="true"]{border-color:var(--accent)}.cat svg{width:28px;height:28px;color:var(--accent)}
+.view{padding:36px 20px 20px}.view h1{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:12px}.h2{font-size:1.5rem;margin:24px 0 10px}.lead{font-size:1.2rem;color:var(--mute);max-width:60ch}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;color:var(--mute)}.stat svg{color:var(--accent)}.stat b{display:block;font:800 2rem "Bricolage Grotesque",sans-serif;color:var(--ink)}
+.seg{display:flex;gap:8px;margin:14px 0}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;align-items:start}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:8px;transition:transform .2s}
+.plan:hover{transform:translateY(-3px)}.plan.hot{border-color:var(--accent);box-shadow:6px 6px 0 var(--accent)}
+.plan svg{color:var(--accent)}.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}.plan li{display:flex;gap:8px;align-items:center}.price{font:800 2.4rem "Bricolage Grotesque",sans-serif}.price small{font-size:1rem;color:var(--mute);font-weight:500}
+.fgrid{display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:28px}.fgrid h4{margin:0 0 10px;color:var(--ink)}
+.fgrid a,.lk{display:block;padding:4px 0;text-decoration:none;background:none;border:0;cursor:pointer;color:var(--mute);text-align:left;font:inherit}.fgrid a:hover,.lk:hover{color:var(--accent)}
+.foot-end{border-top:1px solid var(--line);margin-top:26px;padding-top:18px}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}.fb{grid-column:1/-1}}
+.cmp{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left}.cmp th{color:var(--mute);font-weight:600}
+.hero{overflow-x:clip}.hero .ask{max-width:560px}
+.hero::before{content:"";position:absolute;right:-60px;top:-40px;width:520px;height:520px;background:radial-gradient(circle,hsl(235 100% 70%/.24),transparent 65%);z-index:-1;animation:drift 12s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(-40px,30px) scale(1.12)}}
+.heroart{position:absolute;right:0;top:20px;width:min(400px,34vw);height:auto;display:none}
+@media(min-width:1000px){.heroart{display:block}}
+.ha-card{fill:var(--surface);stroke:var(--line);stroke-width:1.5}.ha-bar{fill:var(--line)}.ha-acc{fill:var(--accent)}.ha-t{fill:var(--mute);font:600 12px "Instrument Sans",sans-serif}
+.wire{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:6 8;animation:dash 1.2s linear infinite}@keyframes dash{to{stroke-dashoffset:-14}}
+.ha-ring{fill:none;stroke:var(--accent);animation:ring 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}@keyframes ring{from{opacity:.7;transform:scale(1)}to{opacity:0;transform:scale(2.8)}}
+.oc{animation:rise .8s both;animation-delay:var(--d)}.fl2{animation:flt 6s ease-in-out infinite;animation-delay:var(--d)}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.rv.in{opacity:1;transform:none}
+.cat{position:relative;overflow:hidden;min-height:160px;background:linear-gradient(150deg,hsl(var(--h) 70% 55%/.2),var(--surface))}
+.cat .bg{position:absolute;right:-10px;bottom:-14px;opacity:.14;transition:transform .4s}.cat .bg svg{width:96px;height:96px;color:var(--ink)}.cat:hover .bg{transform:rotate(-8deg) scale(1.12)}
+.btn.pri{position:relative;overflow:hidden}.btn.pri::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .6s}.btn.pri:hover::after{transform:translateX(120%)}
+.btn:active{transform:scale(.97)}
+.sk{height:118px;border-radius:6px 16px 16px 6px;background:linear-gradient(90deg,var(--line),var(--soft),var(--line));background-size:200% 100%;animation:shim 1.2s linear infinite}@keyframes shim{to{background-position:-200% 0}}
+.toast{animation:tin .25s ease-out}@keyframes tin{from{opacity:0;translate:0 12px}}
+.pif{display:flex;gap:24px;align-items:center;justify-content:space-between;background:linear-gradient(120deg,hsl(20 95% 60%/.2),hsl(340 85% 60%/.16));border:1px solid var(--line);border-radius:22px;padding:28px}.pif h2{font-size:clamp(1.6rem,3.4vw,2.4rem);margin-bottom:10px}.pif p{margin:0 0 16px;max-width:52ch}
+.pif .big{width:96px;height:96px;flex:none;color:hsl(350 80% 55%);animation:beat 1.8s ease-in-out infinite}@keyframes beat{50%{transform:scale(1.12)}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1!important;transform:none!important}}
+.hero{padding:44px 0 24px}
+.hero h1{font-size:clamp(2rem,4.6vw,3.5rem);line-height:1.1;max-width:17ch;letter-spacing:-.03em}
+.hero p.sub{font-size:1.05rem;margin:16px 0 24px;max-width:50ch}
+.ask input{font-size:1rem}
+section{padding:34px 0}
+section>.wrap>h2,.sec-h{font-size:clamp(1.4rem,2.6vw,1.9rem);margin-bottom:18px}
+.view h1{font-size:clamp(1.7rem,3.6vw,2.4rem)}.lead{font-size:1.05rem}.h2{font-size:1.25rem}
+.steps div::before{font-size:1.7rem}.steps b{font-size:1rem}
+.diff b,.empty b{font-size:1.05rem}.stat b{font-size:1.6rem}.price{font-size:1.9rem}
+.tag h3{font-size:1.05rem}.pif h2{font-size:clamp(1.3rem,2.6vw,1.8rem)}.cat{font-size:15px}
+header .wrap{height:64px;gap:18px;max-width:1200px}
+.logo{font-size:20px;flex:none}
+nav{flex:1;margin-left:8px;gap:2px}
+nav>a,nav summary{white-space:nowrap;font-size:14px;font-weight:500;color:var(--mute);padding:8px 12px}
+nav>a:hover,nav summary:hover{color:var(--ink)}
+nav a.on{color:var(--ink);background:var(--soft);font-weight:600}
+nav>a[href="#top"]{display:none}
+.acts{flex:none;gap:8px}
+.acts .btn{height:38px;padding:0 14px;font-size:14px;white-space:nowrap}
+.acts .burger{padding:0 11px}
+.mega{margin-top:8px}
+@media(max-width:1180px){nav>a[href="#top"]{display:flex}}
+@media(max-width:520px){#acct{display:none}.acts .btn{padding:0 11px}}
+.cat{text-decoration:none;color:inherit}
+.cathead{display:flex;gap:22px;align-items:center;padding:26px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(130deg,hsl(var(--h) 70% 55%/.22),var(--surface));margin:12px 0 20px}.cathead>svg{width:72px;height:72px;color:var(--accent);flex:none}.cathead h1{margin:0 0 8px}
+@media(max-width:560px){.cathead{flex-direction:column;align-items:flex-start}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<header><div class="wrap">
+<a class="logo" href="#top" aria-label="Seekr home"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="15" cy="15" r="5" fill="var(--accent)"/><path d="M15 2v6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>Seekr</a>
+<nav id="nav" aria-label="Main"><a href="#top">Home</a><a href="#recent">Marketplace</a><details class="dd"><summary>Categories<i data-lucide="chevron-down"></i></summary><div class="mega wide" id="mega"></div></details><a href="#demand">Demand Check</a><a href="#pay-it-forward">Pay It Forward</a><a href="#how">How it works</a><details class="dd"><summary>About<i data-lucide="chevron-down"></i></summary><div class="mega"><a href="#about"><i data-lucide="building-2"></i>About Us</a><a href="#about-who"><i data-lucide="users"></i>Who We Are</a><a href="#contact"><i data-lucide="mail"></i>Contact Us</a><a href="#help"><i data-lucide="life-buoy"></i>Help Center</a></div></details><a class="m-only" href="#buyer">Buyer Panel</a><a class="m-only" href="#seller">Seller Panel</a><a class="m-only" href="#partner">Become a Founding Partner</a></nav><div class="acts"><button class="btn pri sm" data-post><i data-lucide="plus"></i>Post a request</button><a class="btn sm" href="#partner" style="text-decoration:none"><i data-lucide="handshake"></i>Become a Partner</a><span id="acct"></span><button class="btn sm burger" id="burger" aria-label="Menu" aria-expanded="false"><i data-lucide="menu"></i></button></div>
+</div></header>
+
+<main id="top">
+<div class="wrap hero">
+<h1 class="reveal">Post What You Need. Compare Real Offers. Close With Confidence.</h1>
+<p class="sub reveal">Stop searching through endless listings. Tell us exactly what you need, and let local businesses and sellers bring the offers directly to you.</p>
+<form class="ask reveal" id="askForm" role="search"><input id="q" aria-label="What are you looking for?" placeholder="A set of winter tires, a 2008 Civic alternator, a 2-bedroom sublet…" autocomplete="off"><button class="btn pri" type="submit">Post what you’re looking for</button></form>
+<div class="chips reveal" id="heroChips" role="group" aria-label="Categories"></div>
+<p class="meta reveal"><i data-lucide="map-pin"></i> Now serving Greater Sudbury, Hanmer, Val Caron, Chelmsford, Azilda, Lively, Capreol and Valley East.</p><div class="ctas reveal"><button class="btn pri" data-post>Post What You’re Looking For</button><a class="btn" href="#partner" id="sellBtn" style="text-decoration:none">Become a Founding Partner</a></div>
+</div>
+
+<section id="recent"><div class="wrap">
+<h2>Active buyer requests</h2>
+<div id="list" class="grid" aria-live="polite"></div>
+</div></section>
+
+<section><div class="wrap">
+<h2 id="categories">Popular categories</h2>
+<div class="chips" id="catChips"></div>
+</div></section>
+
+<section><div class="wrap"><div class="pif"><div><h2>Ask for what you need. Give what you can. Keep it local.</h2><p>Request or donate everyday goods and small services in Greater Sudbury. Pay It Forward always carries a $0 platform fee.</p><a class="btn pri" href="#pay-it-forward" style="text-decoration:none"><i data-lucide="heart-handshake"></i>Visit Pay It Forward</a></div><i class="big" data-lucide="heart-handshake" aria-hidden="true"></i></div></div></section>
+<section id="stories" hidden><div class="wrap"><h2>Matches made</h2><div id="storyList" class="grid"></div></div></section>
+
+<section><div class="wrap">
+<h2 id="how">How it works</h2>
+<div class="steps">
+<div><b>Post a request</b>Describe what you need, your budget and preferred condition.</div>
+<div><b>Get connected</b>Local sellers see matching requests.</div>
+<div><b>Compare offers</b>Review quotes by price, condition and availability.</div>
+<div><b>Close with confidence</b>Accept the offer you like. Protected payments are not live yet.</div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<h2>Why Seekr?</h2>
+<div class="diff">
+<div><b>Buyers post for free</b><p>Describe what you need once. Local sellers send structured quotes you can compare side by side.</p></div>
+<div><b>Local first</b><p>Requests reach nearby merchants first, then wider along the Highway 17/69 corridor for high-value items.</p></div>
+<div><b>Nothing staged</b><p>Every request here was posted by a real person. Empty means nobody has posted yet.</p></div>
+</div>
+<details hidden><summary>Brand notes</summary><ul>
+<li><b>Sought</b> — short, a real word that means wanted. Chosen.</li>
+<li><b>Lodestar</b> — evocative, but long and common in other industries.</li>
+<li><b>Wantly</b> — clear, but reads as a coupon app.</li>
+<li><b>Quarry</b> — fits hunting, but suggests mining.</li>
+<li><b>Beacon</b> — friendly, but heavily used already.</li></ul>
+<p class="meta">Tagline: Don’t search for it. Let it find you.</p></details>
+</div></section>
+</main>
+
+<div class="view" id="v-buyer" hidden><div class="wrap"><h1>Buyer Panel</h1><p class="lead">Manage the things you’re looking for and the offers they attract.</p><div id="buyerBox"></div></div></div>
+<div class="view" id="v-seller" hidden><div class="wrap"><h1>Seller Panel</h1><p class="lead">Find buyers who are looking for what you own.</p><div id="sellerBox"></div></div></div>
+<div class="view" id="v-plans" hidden><div class="wrap"><h1>Seller pricing</h1><p class="lead">Buyers post for free and Founding Partner onboarding is free. Fees would apply only to qualifying completed commercial deals, and the rates are pending approval.</p><div id="plansBox"></div></div></div>
+<div class="view" id="v-about" hidden><div class="wrap"><h1>About Seekr</h1><p class="lead">Seekr reverses the marketplace. Instead of browsing endless listings, buyers in Greater Sudbury post what they need and local sellers compete to fulfil it.</p><h2 class="h2" id="about-who">Who we are</h2><div class="diff"><div><i data-lucide="target"></i><br><b>Mission</b><p>Connect people who need something with local sellers who can provide it.</p></div><div><i data-lucide="eye"></i><br><b>Vision</b><p>A trusted local network where demand is posted and neighbours and merchants meet it.</p></div><div><i data-lucide="shield-check"></i><br><b>Values</b><p>Honest listings, respect between members and simple tools.</p></div></div></div></div>
+<div class="view" id="v-contact" hidden><div class="wrap"><h1>Contact us</h1><p class="lead">Messages go to the site owner’s support inbox. A public support email will appear here once one is configured.</p><form id="contactForm" style="max-width:560px"><label>Name<input class="f" name="cn" required maxlength="80"></label><label>Email<input class="f" name="ce" type="email" required></label><label>Subject<input class="f" name="cs" required maxlength="120"></label><label>Message<textarea class="f" name="cm" rows="5" required maxlength="1500"></textarea></label><p><button class="btn pri"><i data-lucide="send"></i>Send message</button></p></form></div></div>
+<div class="view" id="v-help" hidden><div class="wrap"><h1>Help Center</h1><input class="f" id="hq" type="search" aria-label="Search help" placeholder="Search questions" style="max-width:560px;margin:10px 0 18px"><div id="faqBox" style="max-width:720px"></div></div></div>
+<div class="view" id="v-demand" hidden><div class="wrap"><h1>Active Demand Check</h1><p class="lead">See what local buyers are asking for before you register. Live data only, with no buyer contact details.</p><div id="demandBox"></div></div></div>
+<div class="view" id="v-pay-it-forward" hidden><div class="wrap"><h1>Pay It Forward</h1><div id="pifBox"></div></div></div>
+<div class="view" id="v-partner" hidden><div class="wrap"><h1>Become a Founding Partner</h1><p class="lead">Free onboarding, no catalog upload and no monthly fee. Tell us what you can supply and where.</p><form id="partnerForm" style="max-width:560px"><label>Business or counter name<input class="f" name="bn" required maxlength="100"></label><label>Primary vertical<select class="f" name="bv"><option>Auto salvage or parts</option><option>Repair shop</option><option>Pawn or surplus</option><option>Used vehicles or powersports</option><option>Property provider</option><option>Contractor or trades</option><option>Moving or hauling</option><option>Electronics repair</option><option>Industrial or mining surplus</option></select></label><div class="row"><label>Contact name<input class="f" name="bc" required></label><label>Phone for SMS alerts<input class="f" name="bp" type="tel" required></label></div><label>Email<input class="f" name="be" type="email" required></label><div class="row"><label>Location<select class="f" name="ba"><option>Greater Sudbury</option><option>Hanmer</option><option>Val Caron</option><option>Chelmsford</option><option>Azilda</option><option>Lively</option><option>Capreol</option><option>Valley East</option></select></label><label>Service radius<select class="f" name="br"><option>25 km</option><option>125 km</option><option>200 km</option></select></label></div><label>Keywords and stock tags<input class="f" name="bk" maxlength="200" placeholder="e.g. alternator, brake pads, snow tires"></label><p class="meta">Applications are stored for the operator to review. Verification, SMS alerts and payouts are not connected yet.</p><p><button class="btn pri"><i data-lucide="send"></i>Apply</button></p></form></div></div>
+<div class="view" id="v-cat" hidden><div class="wrap"><div id="catBox"></div></div></div>
+<div class="view" id="v-admin" hidden><div class="wrap"><h1>Admin</h1><div id="adminBox"></div></div></div>
+<div class="view" id="v-legal" hidden><div class="wrap"><h1>Policies and information</h1><p class="lead">Working drafts that describe how this page behaves today. They are not legal advice and need legal and accounting review before launch, including privacy law, HST, CRA reporting and marketplace-facilitator terms.</p><div style="max-width:720px"><h2 class="h2" id="legal-privacy">Privacy</h2><p>Requests and offers are visible to everyone who can open this page. Support messages, newsletter sign-ups and partner applications are stored privately for the site owner and editors. The request form doesn’t collect phone numbers or emails.</p><h2 class="h2" id="legal-terms">Terms and conditions</h2><p>Not yet written. A lawyer must draft them before launch, including marketplace-facilitator terms and rules for housing and vehicles. Seekr isn’t a real-estate brokerage or a motor-vehicle dealer.</p><h2 class="h2" id="legal-guidelines">Community guidelines</h2><p>Describe items honestly, ask only for legal goods and services, treat other members with respect, and meet in public places for pickups.</p><h2 class="h2" id="legal-escrow">Payment and escrow</h2><p>Payments and escrow are not live. The planned design holds funds until pickup, delivery or service completion is verified. Release windows (24 or 48 hours) and inspection rules are pending approval and will be configurable by category.</p><h2 class="h2" id="legal-disputes">Dispute resolution</h2><p>Disputes are not live. The planned process pauses release, collects timestamped photos from both sides in a 12-hour evidence window, allows a settlement offer, then goes to manual review.</p></div></div></div>
+<footer><div class="wrap"><div class="fgrid"><div class="fb"><a class="logo" href="#top">Seekr</a><p class="meta">A local reverse marketplace for Greater Sudbury. Ask for what you need. Give what you can. Keep it local.</p><form id="nl" class="ask" style="box-shadow:none;border-width:1px"><input name="ne" type="email" required aria-label="Newsletter email" placeholder="Newsletter email"><button class="btn pri sm"><i data-lucide="mail"></i>Subscribe</button></form></div><div><h4>Company</h4><a href="#about">About Us</a><a href="#about-who">Who We Are</a><a href="#how">How It Works</a><a href="#contact">Contact Us</a></div><div><h4>Marketplace</h4><a href="#recent">Browse Requests</a><a href="#categories">All Categories</a><a href="#cat-general-goods">General Goods</a><a href="#cat-parts-pieces">Parts & Pieces</a><a href="#cat-vehicles">Vehicles</a><a href="#cat-housing-rentals">Housing & Rentals</a><a href="#cat-contractors-trades">Contractors & Trades</a><a href="#demand">Active Demand Check</a><a href="#pay-it-forward">Pay It Forward</a><button class="lk" data-post>Post a Request</button></div><div><h4>Buyers</h4><a href="#buyer">Buyer Panel</a><a href="#buyer">My Requests</a><a href="#help">Buyer FAQ</a></div><div><h4>Sellers</h4><a href="#partner">Become a Founding Partner</a><a href="#seller">Seller Dashboard</a><a href="#plans">Seller Pricing</a><h4 style="margin-top:14px">Support</h4><a href="#help">Help Center</a><a href="#contact">Contact Support</a><a href="#legal-privacy">Privacy Policy</a><a href="#legal-terms">Terms and Conditions</a><a href="#legal-guidelines">Community Guidelines</a><a href="#legal-escrow">Payment and Escrow</a><a href="#legal-disputes">Dispute Resolution</a></div></div><p class="foot-end">© 2026 Seekr — Whatever you’re looking for, someone might already have it. Stop searching everywhere. Post what you need and let the right people find you.</div></footer>
+
+<dialog id="postDlg"><form class="dlg" id="postForm" method="dialog">
+<h2>Post what you’re looking for</h2>
+<label for="pt">What is it?</label><input class="f" id="pt" required maxlength="120" placeholder="e.g. Winter tires, 205/55R16">
+<div class="row"><div><label for="pc">Category</label><select class="f" id="pc"></select></div><div><label for="pb">Brand and model</label><input class="f" id="pb" maxlength="80"></div></div>
+<div class="row"><div><label for="pk">Preferred condition</label><select class="f" id="pk"><option>Open to any</option><option>New</option><option>OEM</option><option>Used</option></select></div><div><label for="pm">Budget ceiling (CAD, 0 for Pay It Forward)</label><input class="f" id="pm" type="number" min="0" step="1" required></div></div>
+<div class="row"><div><label for="pl">Location</label><select class="f" id="pl"><option>Greater Sudbury</option><option>Hanmer</option><option>Val Caron</option><option>Chelmsford</option><option>Azilda</option><option>Lively</option><option>Capreol</option><option>Valley East</option></select></div><div><label for="pu">Urgency</label><select class="f" id="pu"><option>Same Day / Urgent</option><option>Within 48 Hours</option><option>This Week</option><option selected>Flexible / Within 14 Days</option></select></div></div>
+<p class="meta"><i data-lucide="pin"></i> Priority Pin ($5 CAD) and Front-of-Queue + Corridor ($15 CAD) boosts open once payments are connected. Standard requests are free.</p><label for="pd">Details</label><textarea class="f" id="pd" rows="3" maxlength="800" placeholder="Size, edition, reference number, what you’ll accept"></textarea>
+<div class="ctas" style="margin-top:16px"><button class="btn pri" type="submit">Publish request</button><button class="btn" type="button" data-close>Cancel</button></div>
+</form></dialog>
+
+<dialog id="reqDlg"><div class="dlg" id="reqBody"></div></dialog>
+<div id="toastHost"></div>
+
+<script>
+const CATS=["General Goods","Parts & Pieces","Vehicles","Housing & Rentals","Contractors & Trades","Pay It Forward"];
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $=id=>document.getElementById(id);
+let db=null,me=null,reqs=[],cat="All",term="",openId=null,offers=[],offUnsub=null;
+
+function toast(m){const t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.textContent=m;$("toastHost").append(t);setTimeout(()=>t.remove(),4200)}
+function chips(el){el.innerHTML=["All",...CATS].map(c=>`<button class="chip" aria-pressed="${c===cat}" data-cat="${c}">${c}</button>`).join("")}
+function drawChips(){chips($("heroChips"));$("catChips").innerHTML=CATS.map((c,i)=>`<a class="cat" style="--h:${i*58+215}" href="#${cpath(c)}"><i data-lucide="${ICON[c]}"></i>${c}<span class="bg" aria-hidden="true"><i data-lucide="${ICON[c]}"></i></span></a>`).join("");icons()}
+document.addEventListener("click",e=>{
+  const c=e.target.closest("[data-cat]");
+  if(c){cat=c.dataset.cat;drawChips();render();if(c.closest("#catChips"))$("recent").scrollIntoView()}
+  if(e.target.closest("[data-post]"))openPost("");
+  if(e.target.closest("[data-close]"))e.target.closest("dialog").close();
+  const t=e.target.closest("[data-open]");if(t)openReq(t.dataset.open);
+});
+const ICON={"General Goods":"package","Parts & Pieces":"settings-2","Vehicles":"car","Housing & Rentals":"home","Contractors & Trades":"hammer","Pay It Forward":"heart-handshake"};
+const PRICING=`<div class="plans"><div class="plan hot"><i data-lucide="handshake"></i><h3>Founding Partner</h3><div class="price">Free<small> onboarding</small></div><ul><li><i data-lucide="check"></i>No mandatory monthly fee</li><li><i data-lucide="check"></i>No charge for skipping a request</li><li><i data-lucide="check"></i>Matching alerts and standard quoting</li><li><i data-lucide="check"></i>Daily SMS cap, configurable</li></ul><a class="btn pri" href="#partner" style="text-decoration:none">Become a Founding Partner</a></div><div class="plan"><i data-lucide="zap"></i><h3>Seekr Pro</h3><div class="price">TBC</div><ul><li><i data-lucide="check"></i>Unlimited instant alerts</li><li><i data-lucide="check"></i>Local and corridor alerts</li><li><i data-lucide="check"></i>Multi-keyword matching</li><li><i data-lucide="check"></i>Saved quote templates</li></ul><button class="btn" disabled>Not available yet</button></div></div><p class="meta"><b>Pending client approval:</b> success-fee rates, the Seekr Pro price and its start date. The source document gives more than one version of each, so none is published here. Payments are not connected.</p>`;
+async function setOffer(rid,oid,d){try{await db.doc("requests/"+rid+"/offers/"+oid).update(d);toast("Offer updated.")}catch(e){toast("That change wasn’t saved.")}}
+function shareReq(k){const r=reqs.find(x=>x.id===openId);if(!r)return;const url=location.href.split("#")[0],t=`Looking For: ${r.title}\nBudget: ${r.category==="Pay It Forward"?"Free":money(r.budget)+" CAD"}\nLocation: ${r.location}\nHave it? Send an offer on Seekr.`;
+ if(k==="wa")window.open("https://wa.me/?text="+encodeURIComponent(t+"\n"+url),"_blank","noopener");else if(k==="fb")window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url),"_blank","noopener");else navigator.clipboard.writeText(t+"\n"+url).then(()=>toast("Copied."),()=>toast("Copy isn’t available here."))}
+const cmp=r=>`<div style="overflow-x:auto"><table class="cmp"><tr><th></th>${offers.map((o,i)=>`<th>Offer ${i+1}</th>`).join("")}</tr>${[["Price",o=>money(o.price)+" CAD"],["Condition",o=>esc(o.condition)],["Availability",o=>esc(o.avail||"—")],["Within budget",o=>o.price<=r.budget?"Yes":"No"],["Status",o=>esc(o.status||"sent")+(o.counter?" "+money(o.counter):"")]].map(x=>`<tr><th>${x[0]}</th>${offers.map(o=>`<td>${x[1](o)}</td>`).join("")}</tr>`).join("")}</table></div>`;
+const RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const card3=(y,d)=>`<g class="oc" style="--d:${d}s"><g class="fl2" style="--d:${d}s"><rect class="ha-card" x="260" y="${y}" width="140" height="80" rx="16"/><circle class="ha-bar" cx="284" cy="${y+24}" r="10"/><rect class="ha-bar" x="302" y="${y+19}" width="70" height="9" rx="4"/><rect class="ha-bar" x="276" y="${y+44}" width="96" height="7" rx="3"/><rect class="ha-acc" x="276" y="${y+58}" width="44" height="12" rx="6"/></g></g>`;
+const HEROART=`<svg class="heroart" viewBox="0 0 420 400" role="img" aria-label="One buyer request connected to several local seller offers"><path class="wire" d="M154 200C206 200 206 70 260 70"/><path class="wire" d="M154 200H260"/><path class="wire" d="M154 200C206 200 206 330 260 330"/><text class="ha-t" x="14" y="120">Your request</text><text class="ha-t" x="260" y="20">Local offers</text><g class="oc" style="--d:.1s"><g class="fl2" style="--d:0s"><rect class="ha-card" x="14" y="130" width="140" height="140" rx="18"/><circle class="ha-ring" cx="40" cy="160" r="6"/><circle class="ha-acc" cx="40" cy="160" r="6"/><rect class="ha-bar" x="56" y="155" width="70" height="10" rx="5"/><rect class="ha-bar" x="30" y="190" width="100" height="8" rx="4"/><rect class="ha-bar" x="30" y="208" width="80" height="8" rx="4"/><rect class="ha-acc" x="30" y="236" width="56" height="18" rx="9"/></g></g>${card3(30,.3)}${card3(160,.5)}${card3(290,.7)}</svg>`;
+function countUp(){if(RM)return;document.querySelectorAll(".stat b:not([data-c])").forEach(b=>{b.dataset.c=1;const m=b.textContent.match(/^(\$?)([\d,]+)$/);if(!m)return;const to=+m[2].replace(/,/g,""),t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/900);b.textContent=m[1]+Math.round(to*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(f)})(t0)})}
+const slug=c=>c.toLowerCase().replace(/&/g,"").replace(/\s+/g," ").trim().replace(/ /g,"-");
+const cpath=c=>c==="Pay It Forward"?"pay-it-forward":"cat-"+slug(c);
+const CATINFO={"General Goods":{d:"Everyday items from local sellers, such as electronics, tools, household goods and surplus finds.",s:["Pawn and surplus shops","Electronics repair shops","Independent sellers"]},"Parts & Pieces":{d:"Hard-to-find parts for vehicles, equipment and electronics, quoted by the people who stock them.",s:["Auto salvage yards","Parts jobbers","Repair shops","Industrial and mining surplus"]},"Vehicles":{d:"Cars, trucks, powersports and more. Post what you want and let sellers come to you.",s:["Used vehicle sellers","Powersports businesses"]},"Housing & Rentals":{d:"Sublets, rooms, roommates and lease takeovers in Greater Sudbury.",s:["Independent landlords","Property providers"],n:"Seekr is not a real-estate brokerage."},"Contractors & Trades":{d:"Ask for quotes on repairs, renovations, moving and everyday services.",s:["Contractors and tradespeople","Moving and hauling businesses"]}};
+$("partnerForm").addEventListener("submit",async e=>{e.preventDefault();const f=e.target;try{await ticket({kind:"partner",business:f.bn.value.trim(),vertical:f.bv.value,contact:f.bc.value.trim(),phone:f.bp.value.trim(),email:f.be.value.trim(),area:f.ba.value,radius:f.br.value,keywords:f.bk.value.trim()});f.reset();toast("Application received. SMS alerts aren’t connected yet.")}catch(err){toast("Sign in with posting access to apply.")}});
+// Illustrative pricing: edit before launch.
+const PLANS=[{id:"starter",name:"Starter Seller",icon:"user",m:9,y:90,limit:"Up to 10 active listings",feat:["Basic seller profile","Respond to buyer requests","Basic statistics"]},{id:"pro",name:"Professional Seller",icon:"briefcase",m:29,y:290,hot:1,limit:"Up to 100 active listings",feat:["Everything in Starter","Advanced search and filters","Matching notifications","Business branding"]},{id:"biz",name:"Business Seller",icon:"building-2",m:99,y:990,limit:"Custom listing limits",feat:["Everything in Professional","Team accounts","Priority support","Enhanced visibility"]}];
+const FAQ=[["How do I post a request?","Press Post a Request, describe the item, set a budget and publish. Sellers can then open it and send offers."],["Who can post requests or send offers?","People with posting access to this page. Viewers can browse but not write."],["How do I accept an offer?","Open the request from your Buyer Panel, then press Accept offer. The request is marked Matched."],["Can I pause or close a request?","Yes. Paused and fulfilled requests leave public browsing. You can resume a paused request."],["What does Seekr cost?","Posting a request is free. Seller fees and Seekr Pro pricing are pending approval and aren’t charged yet."],["Are payments protected by escrow?","Not yet. Escrow and payouts need a payment provider that isn’t connected, so agree terms directly and meet safely."]];
+let term2="m",isAdm=false,loaded=false,failed=false;const VIEWS=["buyer","seller","plans","about","contact","help","demand","pay-it-forward","partner","admin","legal","cat"];
+const set=(el,h)=>{if(el&&el.dataset.h!==h){el.innerHTML=h;el.dataset.h=h}};
+const icons=()=>{try{window.lucide&&lucide.createIcons()}catch(e){}};
+const money=n=>"$"+Number(n||0).toLocaleString();
+const stat=(i,n,l)=>`<div class="stat"><i data-lucide="${i}"></i><b>${n}</b>${l}</div>`;
+const gate=()=>`<div class="empty"><b>Sign in to continue</b>Panels belong to your claude.ai account. Open this page while signed in.</div>`;
+const rb=(a,i,l,id)=>`<button class="btn sm" data-act="${a}" data-id="${esc(id)}"><i data-lucide="${i}"></i>${l}</button>`;
+const card=r=>`<button class="tag" data-open="${esc(r.id)}"><h3>${esc(r.title)}</h3><div class="meta">${esc(r.category)}${r.location?" · "+esc(r.location):""}</div><div class="budget">${r.category==="Pay It Forward"?"Free":"Up to "+money(r.budget)}</div></button>`;
+function paintViews(){
+ const mine=me?reqs.filter(r=>r.uid===me):[],open=reqs.filter(r=>r.status==="open"&&r.uid!==me);
+ set($("acct"),me?`<details class="dd right"><summary class="btn sm"><i data-lucide="circle-user"></i>Account</summary><div class="mega"><a href="#buyer"><i data-lucide="shopping-bag"></i>Buyer Panel</a><a href="#seller"><i data-lucide="store"></i>Seller Panel</a>${isAdm?'<a href="#admin"><i data-lucide="shield-check"></i>Admin</a>':""}</div></details>`:`<button class="btn sm" data-signin><i data-lucide="log-in"></i>Sign in</button>`);
+ set($("mega"),CATS.map(c=>`<a href="#${cpath(c)}"><i data-lucide="${ICON[c]}"></i>${c}</a>`).join(""));
+ set($("buyerBox"),!me?gate():`<div class="stats">${stat("clipboard-list",mine.filter(r=>r.status==="open").length,"Active requests")}${stat("pause",mine.filter(r=>r.status==="paused").length,"Paused")}${stat("handshake",mine.filter(r=>r.status==="matched").length,"Matched")}</div><h2 class="h2">My wanted requests</h2>`+(mine.length?mine.map(r=>`<div class="offer"><b>${esc(r.title)}</b><span class="pill">${esc(r.status)}</span><div class="meta">${esc(r.category)} · up to ${money(r.budget)}</div><div class="ctas" style="margin-top:10px"><button class="btn sm" data-open="${esc(r.id)}"><i data-lucide="inbox"></i>View offers</button>${r.status==="open"?rb("pause","pause","Pause",r.id)+rb("done","check","Mark fulfilled",r.id):""}${r.status==="paused"?rb("resume","play","Resume",r.id):""}${rb("del","trash-2","Delete",r.id)}</div></div>`).join(""):`<div class="empty"><b>No requests yet</b>Post what you’re looking for and offers will appear here.</div>`)+`<p><button class="btn pri" data-post><i data-lucide="plus"></i>New request</button></p>`);
+ set($("sellerBox"),!me?gate():`<div class="stats">${stat("megaphone",open.length,"Open requests to answer")}</div><div class="offer"><b>Founding Partner</b><div class="meta">Onboarding is free with no monthly fee. SMS alerts, quote templates and payouts aren’t connected yet.</div><p><a class="btn sm pri" href="#plans" style="text-decoration:none"><i data-lucide="credit-card"></i>Seller pricing</a></p></div><h2 class="h2">Find buyers</h2>`+(open.length?`<div class="grid">${open.map(card).join("")}</div>`:`<div class="empty"><b>No open requests</b>New buyer requests appear here as they’re posted.</div>`));
+ set($("plansBox"),PRICING);set($("legacyBox"),`<div class="seg" role="group" aria-label="Billing period"><button class="chip" aria-pressed="${term2==="m"}" data-term="m">Monthly</button><button class="chip" aria-pressed="${term2==="y"}" data-term="y">Yearly</button></div><div class="plans">${PLANS.map(p=>`<div class="plan ${p.hot?"hot":""}"><i data-lucide="${p.icon}"></i><h3>${p.name}</h3>${p.hot?'<span class="pill" style="margin:0;justify-self:start">Recommended</span>':""}<div class="price">${money(p[term2])}<small>/${term2==="m"?"month":"year"}</small></div><div class="meta">${term2==="y"?"Saves "+money(p.m*12-p.y)+" a year":"Switch to yearly to save"}</div><b>${p.limit}</b><ul>${p.feat.map(f=>`<li><i data-lucide="check"></i>${f}</li>`).join("")}</ul><button class="btn" disabled>Payments not connected</button></div>`).join("")}</div><p class="meta">Prices are illustrative and live in the PLANS config. Features describe the planned tiers. No plan can be bought or activated yet.</p>`);
+ const od=reqs.filter(r=>r.status==="open"),paid=od.filter(r=>r.category!=="Pay It Forward"),pf=od.filter(r=>r.category==="Pay It Forward");
+ const by=CATS.map(c=>[c,od.filter(r=>r.category===c).length]).filter(x=>x[1]).sort((a,b)=>b[1]-a[1]);
+ set($("demandBox"),`<div class="stats">${stat("clipboard-list",od.length,"Open requests")}${stat("wallet",money(paid.reduce((s,r)=>s+Number(r.budget||0),0)),"Combined budget (CAD)")}${stat("zap",od.filter(r=>/Urgent|48/.test(r.urgency||"")).length,"Urgent or within 48 hours")}</div><h2 class="h2">Demand by category</h2>`+(by.length?by.map(x=>`<div class="offer"><i data-lucide="${ICON[x[0]]}"></i> <b>${esc(x[0])}</b><span class="pill">${x[1]}</span></div>`).join(""):'<div class="empty"><b>No open requests yet</b>This page shows live data only, so it stays empty until buyers post.</div>')+(od.length?`<h2 class="h2">Open now</h2><div class="grid">${od.map(card).join("")}</div>`:"")+`<p><a class="btn pri" href="#partner" style="text-decoration:none"><i data-lucide="handshake"></i>Become a Founding Partner</a></p>`);
+ set($("pifBox"),`<p class="lead">Ask for what you need. Give what you can. Keep it local.</p><div class="stats">${stat("heart-handshake",pf.length,"Open community requests")}${stat("gift","$0","Platform fee, always")}</div><p><button class="btn pri" data-post data-pif><i data-lucide="plus"></i>Ask for something</button></p>`+(pf.length?`<div class="grid">${pf.map(card).join("")}</div>`:'<div class="empty"><b>No community requests yet</b>Be the first to ask for help or offer it.</div>'));
+ const tot=reqs.length,won=reqs.filter(r=>r.status==="matched"),wp=won.filter(r=>r.category!=="Pay It Forward"),gmv=wp.reduce((s,r)=>s+Number(r.agreed||0),0),resc=reqs.filter(r=>r.status==="open"&&!r.offers&&r.createdAt&&Date.now()-r.createdAt>216e5);
+ const trow=(l,t,a)=>`<tr><th>${l}</th><td>${t}</td><td><b>${a}</b></td></tr>`;
+ set($("adminBox"),!isAdm?'<div class="empty"><b>Editors only</b>This page is for the site owner and editors.</div>':`<div class="stats">${stat("clipboard-list",tot,"Total requests")}${stat("inbox",reqs.filter(r=>r.status==="open").length,"Open")}${stat("handshake",won.length,"Matched")}${stat("heart-handshake",reqs.filter(r=>r.category==="Pay It Forward").length,"Pay It Forward")}</div><h2 class="h2">Month 1 pilot targets vs actual</h2><div style="overflow-x:auto"><table class="cmp"><tr><th></th><th>Target</th><th>Actual</th></tr>${trow("Buyer requests",120,tot)}${trow("Completed deals",30,wp.length)}${trow("Fill rate","25%",tot?Math.round(wp.length/tot*100)+"%":"—")}${trow("Average deal","$185",wp.length?money(Math.round(gmv/wp.length)):"—")}${trow("GMV","$5,550",money(gmv))}</table></div><p class="meta">Targets come from the business blueprint. They are goals, not results. Time to first offer isn’t tracked yet.</p><h2 class="h2">Concierge Rescue</h2><p class="meta">Open requests with no offers after six hours.</p>`+(resc.length?`<div class="grid">${resc.map(card).join("")}</div>`:'<div class="empty">Nothing needs rescuing.</div>')+`<h2 class="h2">Moderation</h2>`+(reqs.length?reqs.map(r=>`<div class="offer"><b>${esc(r.title)}</b><span class="pill">${esc(r.status)}</span> ${rb("del","trash-2","Remove",r.id)}</div>`).join(""):'<div class="empty">No requests.</div>')+`<p class="meta">Founding Partner applications and support messages are stored privately under tickets, readable by editors from the artifact’s database.</p>`);
+ const cs=location.hash.startsWith("#cat-")?CATS.find(c=>slug(c)===location.hash.slice(5)):null,ci=cs&&CATINFO[cs],cr=cs?od.filter(r=>r.category===cs):[];
+ set($("catBox"),!ci?'<div class="empty"><b>Category not found</b><a href="#categories">Browse all categories</a></div>':`<p class="meta"><a href="#top">Home</a> / <a href="#categories">Categories</a> / ${esc(cs)}</p><div class="cathead" style="--h:${CATS.indexOf(cs)*58+215}"><i data-lucide="${ICON[cs]}"></i><div><h1>${esc(cs)}</h1><p class="lead">${ci.d}</p><button class="btn pri" data-post data-postcat="${esc(cs)}"><i data-lucide="plus"></i>Post a request in ${esc(cs)}</button></div></div><h2 class="h2">Typical sellers</h2><div class="chips">${ci.s.map(x=>`<span class="chip">${x}</span>`).join("")}</div>${ci.n?`<p class="meta">${ci.n}</p>`:""}<h2 class="h2">Open requests</h2>`+(cr.length?`<div class="grid">${cr.map(card).join("")}</div>`:'<div class="empty"><b>No open requests yet</b>Be the first to post one in this category.</div>')+`<p><a class="btn" href="#partner" style="text-decoration:none"><i data-lucide="handshake"></i>Sell in this category</a></p>`);
+ const q=($("hq").value||"").toLowerCase();
+ set($("faqBox"),FAQ.filter(f=>(f[0]+f[1]).toLowerCase().includes(q)).map(f=>`<details class="offer"><summary>${f[0]}</summary><p class="meta">${f[1]}</p></details>`).join("")||'<div class="empty">No answers match. Try the contact page.</div>');
+ icons();countUp();
+}
+function route(){
+ const h=location.hash.slice(1),v=VIEWS.find(x=>h===x||h.startsWith(x+"-"));
+ $("top").hidden=!!v;document.querySelectorAll(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
+ document.querySelectorAll("nav>a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+h));
+ $("nav").classList.remove("open");$("burger").setAttribute("aria-expanded","false");
+ paintViews();const t=h&&document.getElementById(h);t&&t.offsetParent!==null?t.scrollIntoView():scrollTo(0,0);
+}
+addEventListener("hashchange",route);
+addEventListener("scroll",()=>{document.querySelector("header").classList.toggle("s",scrollY>8);const ha=document.querySelector(".heroart");if(ha&&!RM)ha.style.transform="translateY("+Math.min(scrollY*.1,36)+"px)"},{passive:true});
+$("burger").addEventListener("click",()=>{const o=$("nav").classList.toggle("open");$("burger").setAttribute("aria-expanded",o)});
+$("hq").addEventListener("input",paintViews);
+document.addEventListener("click",async e=>{
+ const d=e.target.closest("details.dd");document.querySelectorAll("details.dd[open]").forEach(x=>{if(x!==d||e.target.closest(".mega a"))x.open=false});
+ const t=e.target.closest("[data-term]");if(t){term2=t.dataset.term;paintViews()}
+ const pcat=e.target.closest("[data-postcat]");if(pcat)$("pc").value=pcat.dataset.postcat;
+ const sh=e.target.closest("[data-share]");if(sh)shareReq(sh.dataset.share);
+ if(e.target.closest("[data-pif]"))$("pc").value="Pay It Forward";
+ if(e.target.closest("[data-signin]"))toast("Sign-in uses your claude.ai account. Open this page while signed in to post and make offers.");
+ const a=e.target.closest("[data-act]");if(!a||!db)return;
+ const ref=db.doc("requests/"+a.dataset.id),st={pause:"paused",resume:"open",done:"closed"}[a.dataset.act];
+ try{if(a.dataset.act==="del"){if(a.dataset.arm)await ref.delete();else{a.dataset.arm=1;a.textContent="Tap again to confirm"}}else await ref.update({status:st})}catch(err){toast("That change wasn’t saved.")}
+});
+async function ticket(d){if(!db||!me)throw 0;await db.collection("tickets/"+me+"/items").add({...d,createdAt:Date.now()})}
+$("contactForm").addEventListener("submit",async e=>{e.preventDefault();const f=e.target;try{await ticket({kind:"support",name:f.cn.value.trim(),email:f.ce.value.trim(),subject:f.cs.value.trim(),message:f.cm.value.trim()});f.reset();toast("Message sent to the support inbox.")}catch(err){toast("Sign in with posting access to send a message.")}});
+$("nl").addEventListener("submit",async e=>{e.preventDefault();try{await ticket({kind:"newsletter",email:e.target.ne.value.trim()});e.target.reset();toast("You’re subscribed.")}catch(err){toast("Sign in with posting access to subscribe.")}});
+document.querySelector(".hero").insertAdjacentHTML("beforeend",HEROART);
+if("IntersectionObserver" in window&&!RM){const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.1});document.querySelectorAll("#top section .wrap>*,.steps>div,.diff>div").forEach(el=>{el.classList.add("rv");io.observe(el)})}
+route();
+$("pc").innerHTML=CATS.map(c=>`<option>${c}</option>`).join("");
+$("askForm").addEventListener("submit",e=>{e.preventDefault();openPost($("q").value.trim())});
+$("q").addEventListener("input",e=>{term=e.target.value.trim().toLowerCase();render()});
+
+function openPost(t){if(t)$("pt").value=t;$("postDlg").showModal();$("pt").focus()}
+
+function render(){paintViews();
+  const list=reqs.filter(r=>["open","matched"].includes(r.status)&&(cat==="All"||r.category===cat)&&(!term||[r.title,r.brand,r.details].join(" ").toLowerCase().includes(term)));
+  $("list").innerHTML=(!loaded&&!failed)?'<div class="sk"></div>'.repeat(3):list.length?list.map(r=>`<button class="tag ${r.status==="matched"?"matched":""}" data-open="${esc(r.id)}"><h3>${esc(r.title)}</h3><div class="meta">${esc(r.category)}${r.brand?" · "+esc(r.brand):""}${r.location?" · "+esc(r.location):""}</div><div class="budget">${r.category==="Pay It Forward"?"Free":"Up to "+money(r.budget)+" CAD"}${r.urgency?'<span class="pill">'+esc(r.urgency)+'</span>':""}${r.offers?'<span class="pill">'+r.offers+(r.offers>1?' offers':' offer')+'</span>':""}${r.status==="matched"?'<span class="pill ok">Matched</span>':""}</div></button>`).join(""):
+  `<div class="empty" style="grid-column:1/-1"><b>${db?(reqs.length?"Nothing matches that filter":"No requests yet"):"Requests can’t load right now"}</b>${db?"Post the first thing you’re looking for and sellers will be able to find it.":"Open this page signed in to claude.ai to read and post requests."}</div>`;
+  const won=reqs.filter(r=>r.status==="matched");
+  $("stories").hidden=!won.length;
+  $("storyList").innerHTML=won.slice(0,6).map(r=>`<div class="tag matched"><h3>${esc(r.title)}</h3><div class="meta">Matched at $${Number(r.agreed||0).toLocaleString()}</div></div>`).join("");
+}
+
+$("postForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!db)return toast("Posting isn’t available here. Sign in to claude.ai and try again.");
+  try{
+    await db.collection("requests").add({title:$("pt").value.trim(),category:$("pc").value,brand:$("pb").value.trim(),condition:$("pk").value,budget:Number($("pm").value),location:$("pl").value,urgency:$("pu").value,details:$("pd").value.trim(),uid:me,status:"open",createdAt:Date.now()});
+    $("postDlg").close();e.target.reset();toast("Request published.");
+  }catch(err){toast("Couldn’t publish. Your access level may not allow posting.")}
+});
+
+function openReq(id){
+  openId=id;if(offUnsub)offUnsub();offers=[];drawReq();$("reqDlg").showModal();
+  if(!db)return;
+  offUnsub=db.collection("requests/"+id+"/offers").orderBy("createdAt","desc").limit(50).onSnapshot(s=>{offers=s.docs.map(d=>({id:d.id,...d.data()}));drawReq()},()=>{});
+}
+$("reqDlg").addEventListener("close",()=>{if(offUnsub)offUnsub();offUnsub=null;openId=null});
+
+function drawReq(){
+  const r=reqs.find(x=>x.id===openId);if(!r)return;
+  const mine=me&&r.uid===me,open=r.status==="open";
+  $("reqBody").innerHTML=`<h2>${esc(r.title)}</h2>
+  <p class="meta">${esc(r.category)}${r.brand?" · "+esc(r.brand):""} · Condition: ${esc(r.condition)}${r.location?" · "+esc(r.location):""}</p>
+  ${r.details?`<p>${esc(r.details)}</p>`:""}<p class="budget">${r.category==="Pay It Forward"?"Free community request":"Budget ceiling: "+money(r.budget)+" CAD"}${r.urgency?" · "+esc(r.urgency):""}</p>
+  <div class="ctas" style="margin:12px 0"><button class="btn sm" data-share="wa"><i data-lucide="message-circle"></i>WhatsApp</button><button class="btn sm" data-share="fb"><i data-lucide="facebook"></i>Facebook</button><button class="btn sm" data-share="cp"><i data-lucide="link"></i>Copy link</button></div><h3 style="font-size:1.3rem;margin:20px 0 6px">Offers (${offers.length})</h3>${offers.length>1?cmp(r):""}
+  ${offers.length?offers.map(o=>`<div class="offer ${o.status==="accepted"?"acc":""}"><b>$${Number(o.price).toLocaleString()}</b> · ${esc(o.condition)}${o.price<=r.budget?'<span class="pill">Within budget</span>':""}${o.status&&o.status!=="sent"?'<span class="pill'+(o.status==="accepted"?' ok':'')+'">'+esc(o.status)+(o.counter?' $'+o.counter:"")+'</span>':""}<div class="meta">${esc(o.avail||"")}</div><div>${esc(o.message)}</div>${mine&&open?`<div class="ctas" style="margin-top:8px"><button class="btn sm pri" data-accept="${esc(o.id)}">Accept offer</button><button class="btn sm" data-decl="${esc(o.id)}">Decline</button><input class="f" id="c${esc(o.id)}" type="number" min="1" placeholder="Counter CAD" aria-label="Counter-offer in CAD" style="width:120px"><button class="btn sm" data-ctr="${esc(o.id)}">Counter</button></div>`:""}</div>`).join(""):'<p class="meta">No offers yet.</p>'}
+  ${open&&!mine?`<form id="offForm"><h3 style="font-size:1.3rem;margin:20px 0 0">I have this</h3><div class="row"><div><label for="op">Price (CAD)</label><input class="f" id="op" type="number" min="0" required></div><div><label for="oc">Condition</label><select class="f" id="oc"><option>New</option><option>OEM</option><option>Used</option></select></div></div><label for="oa">Availability and handoff</label><select class="f" id="oa"><option>In stock, pickup</option><option>In stock, delivery</option><option>Can source within 48 hours</option><option>Service, scheduled</option></select><label for="om">Message to the buyer</label><textarea class="f" id="om" rows="3" required maxlength="600" placeholder="Describe what you have and where you are"></textarea><div class="ctas" style="margin-top:14px"><button class="btn pri" type="submit">Send offer</button><button class="btn" type="button" data-close>Close</button></div></form>`:`<div class="ctas" style="margin-top:14px"><button class="btn" type="button" data-close>Close</button></div>`}`;
+  const f=$("offForm");
+  if(f)f.addEventListener("submit",async e=>{e.preventDefault();
+    try{await db.collection("requests/"+r.id+"/offers").add({price:Number($("op").value),condition:$("oc").value,avail:$("oa").value,message:$("om").value.trim(),uid:me,status:"sent",createdAt:Date.now()});await db.doc("requests/"+r.id).update({offers:(r.offers||0)+1});toast("Offer sent.")}
+    catch(err){toast("Couldn’t send the offer. Your access level may not allow it.")}});
+  $("reqBody").querySelectorAll("[data-decl]").forEach(b=>b.onclick=()=>setOffer(r.id,b.dataset.decl,{status:"declined"}));
+  $("reqBody").querySelectorAll("[data-ctr]").forEach(b=>b.onclick=()=>{const v=Number($("c"+b.dataset.ctr).value);if(v>0)setOffer(r.id,b.dataset.ctr,{status:"countered",counter:v});else toast("Enter a counter price in CAD.")});
+  $("reqBody").querySelectorAll("[data-accept]").forEach(b=>b.addEventListener("click",async()=>{
+    const o=offers.find(x=>x.id===b.dataset.accept);
+    try{await db.doc("requests/"+r.id+"/offers/"+o.id).update({status:"accepted"});await db.doc("requests/"+r.id).update({status:"matched",agreed:o.price});toast("Offer accepted.")}
+    catch(err){toast("Couldn’t accept that offer.")}}));
+}
+
+drawChips();render();
+(async()=>{
+  try{
+    if(!window.claude){failed=true;render();return}
+    const u=await claude.use("user");if(u){try{me=await u.id()}catch{}try{isAdm=await u.canEdit()}catch{}}
+    db=await claude.use("db");
+    if(!db){failed=true;render();return}
+    db.collection("requests").orderBy("createdAt","desc").limit(60).onSnapshot(s=>{reqs=s.docs.map(d=>({id:d.id,...d.data()}));loaded=true;render();if(openId)drawReq()},()=>{failed=true;render()});
+  }catch(e){failed=true;render()}
+})();
+</script>
+</body>
+</html>
